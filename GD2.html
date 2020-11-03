@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guided 2</title>
     <script src="vue.js"></script>
+    
 </head>
 <body>
     <div id="app">
@@ -18,6 +19,9 @@
             </span>
             <span v-else-if="wanita.status == 'belum menikah'">
                 masih lajang hehe.
+            </span>
+            <span v-else>
+                bingung
             </span>
         </p>
         <p v-show="wanita.skills">Kemampuanku adalah</p>
@@ -42,7 +46,7 @@
                     'mencuci piring',
                     'coding'
                 ],
-                status: 'belum menikah',
+                status: 'rumit',
             },
         },
         methods:{

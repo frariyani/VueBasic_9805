@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UGD</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>Tebak angka 1-10</h1>
+        <form v-on:submit.prevent="onSubmit" @submit="checkForm">
+            <p>
+                <label for="angka">Angka</label>
+                <input :disabled="clicked" id="angka" v-model="guess" type="number" name="num" min="0" >
+            </p>
+            <p>
+                <input :disabled="clicked" type="submit" value="Submit" @click="checkForm">
+            </p>
+            <p>
+                <span v-if="guess == true && inputNumber != null && clicked == true">
+                    Kamu Menang!
+                    <button @click="start" type="reset">Main Lagi</button>
+                </span>
+                <span v-else-if="guess == false && inputNumber != null && clicked == true">
+                    Tebakanmu salah!
+                    <p v-if="limit == 0">Kamu kalah!</p>
+                    <button @click="start" type="reset">Main Lagi</button>
+                </span>
+            </p>
+            <div class="card">
+                <div class="card-body" style="margin: auto;">
+                    {{ praktikan.nama }} | {{ praktikan.npm }} | {{ praktikan.kelas }}
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+<script>
+    new Vue({
+        el: "#app",
+        data:{
+            praktikan:{
+                nama: "Ariyani",
+                npm: "180709805",
+                kelas: "C",
+            },
+            limit: 3,
+            clicked: false,
+            guess: false,
+            secretNumber: 5,
+            inputNumber: null
+        },
+        methods:{
+            checkForm: function(e){
+                if(this.secretNumber == this.inputNumber){
+                    this.guess = true;
+                    this.clicked = true;
+                    this.limit = 3;
+                }else{
+                    this.guess = false;
+                    this.clicked = true;
+                    this.limit--;
+                }
+                e.preventDefault();
+            },
+            start(){
+                this.guess = false;
+                this.clicked = false;
+                this.inputNumber = null;
+            }
+        }
+    });
+</script>
+</html>
